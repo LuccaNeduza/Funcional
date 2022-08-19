@@ -1,0 +1,80 @@
+-- Estudante: Luiz Carlos R. Neduziak
+
+{-Escreva uma função chamada soma1 que recebe um inteiro como argumento e retorna um inteiro uma unidade maior que a entrada.-}
+soma1 :: Int -> Int
+soma1 x = x + 1
+
+{-Escreva uma função chamada sempre que, não importando o valor de entrada, devolva sempre zero. Observe que neste caso a entrada pode ser de qualquer tipo.-}
+sempre :: String -> Int
+sempre x = 0
+
+{-Escreva uma função chamada treco que receba três valores em ponto flutuantes com precisão dupla e retorne o resultado da soma dos dois primeiros multiplicado pelo terceiro.-}
+treco :: Double -> Double -> Double -> Double
+treco a b c = (a + b) * c
+
+{-Escreva uma função chamada resto que devolva o resto de uma divisão entre dois números inteiros.-}
+resto :: Int -> Int -> Int
+resto a b = mod a b
+
+{-Escreva uma função chamada precoMaior que devolva o maior valor entre quatro valores monetários.-}
+precoMaior :: Double -> Double -> Double -> Double -> Double
+precoMaior x y z w 
+  |x>=y && x>=z && x>=w = x
+  |y>=x && y>=z && y>=w = y
+  |z>=y && z>=x && z>=w = z
+  |w>=y && w>=z && w>=x = w
+
+{-Escreva uma função chamada impar que devolva True, sempre que o resultado do produto de dois números inteiros for ímpar.-}
+impar :: Int -> Int -> Bool
+impar x y = if mod x 2 == 0 || mod y 2 ==0  then True else False
+
+{-Escreva uma função em Haskell que receba números reais (double) e devolva o resultado da equação 𝑥^2 + 𝑦/2 + 𝑧-}
+equation :: Double -> Double -> Double -> Double
+equation x y z = x**2 + y/2 + z
+
+{-Escreva uma função em Haskell chamada diagnostico que receba o peso do aluno e imprima um diagnóstico de obesidade, segundo a tabela que pode ser encontrada no link: Sobrepeso, obesidade e obesidade mórbida: entenda a diferença entre os três termos (cuidadospelavida.com.br). Observe que este diagnóstico é meramente estatístico e não tem nenhum valor real, está sendo usado nesta questão apenas para a definição das faixas. Todo e qualquer diagnóstico deve ser feito por um profissional médico.-}
+diagnostico :: Double -> Double -> IO()
+diagnostico peso altura
+    |imc<17 = putStrLn "Muito abaixo do peso"
+    |17<=imc && imc<18.49 = putStrLn "Abaixo do peso"
+    |18.49<=imc && imc<24.99 = putStrLn "Peso normal"
+    |24.99<=imc && imc<29.99 = putStrLn "Sobrepeso"
+    |29.99<=imc && imc<34.99 = putStrLn "Obesidade leve"
+    |34.99<=imc && imc<39.99 = putStrLn "Obesidade severa"
+    |otherwise = putStrLn "Obesidade morbida"
+  where imc = peso/altura^2
+
+{-Escreva uma função em Haskell chamada bissexto que receba um ano e devolva True se o ano for bisexto sabendo que anos bissextos obedecem a seguinte regra:
+𝑇𝑜𝑑𝑜𝑠 𝑜𝑠 𝑎𝑛𝑜𝑠 𝑞𝑢𝑒 𝑠𝑒𝑗𝑎𝑚 𝑑𝑖𝑣𝑖𝑠í𝑣𝑒𝑖𝑠 𝑝𝑜𝑟 4 𝐸𝑥𝑐𝑒𝑡𝑜 𝑜𝑠 𝑎𝑛𝑜𝑠 𝑞𝑢𝑒 𝑠ã𝑜 𝑚ú𝑙𝑡𝑖𝑝𝑙𝑜𝑠 𝑑𝑒 100 𝐸𝑥𝑐𝑒𝑡𝑜 𝑜𝑠 𝑎𝑛𝑜𝑠 𝑞𝑢𝑒 𝑠ã𝑜 𝑚ú𝑙𝑡𝑖𝑝𝑙𝑜𝑠 𝑑𝑒 400
+1997 não é bissexto, 1900 não é bissexto e 2000 é bissexto.-}
+bissexto :: Int -> Bool
+bissexto ano = if (mod ano 4 == 0 && mod ano 100 /= 0 || mod ano 400 == 0) then True else False
+
+main :: IO()
+main = do
+putStrLn $ "Func.1 entrada: 4 resultado: " ++ show(soma1 4)
+putStrLn ""
+
+putStrLn $ "Func.2 entrada: 5; resultado: " ++ show(sempre "5")
+putStrLn ""
+
+putStrLn $ "Func.3 entrada: 2.1, 4.3, 6.6; resultado: " ++ show(treco 2.1 4.3 6.6)
+putStrLn ""
+
+putStrLn $ "Func.4 entrada: 5, 2; resultado: " ++ show(resto 5 2)
+putStrLn ""
+
+putStrLn $ "Func.5 entrada: 2, 5, 8, 9; resultado: " ++ show(precoMaior 2 5 8 9)
+putStrLn ""
+
+putStrLn $ "Func.6 entrada: 2, 4; resultado: " ++ show(impar 2 4)
+putStrLn ""
+
+putStrLn $ "Func.7 entrada: 2, 2, 2; resultado: " ++ show(equation 2 2 2)
+putStrLn ""
+
+putStrLn "Func.8 entrada: 130, 1.5; resultado: "
+diagnostico 130 1.5
+putStrLn ""
+
+putStrLn $ "Func.9 entrada: 1900; resultado: " ++ show(bissexto 1900)
