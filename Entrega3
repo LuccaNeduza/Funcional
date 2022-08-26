@@ -1,0 +1,57 @@
+{-Escreva uma função para o cálculo dos números da sequência de Fibonacci, utilizando Haskell-}
+fibonacci :: Int -> Int
+fibonacci 0 = 0
+fibonacci 1 = 1
+fibonacci n = fibonacci(n-1) + fibonacci(n-2)
+
+{-Um dos primeiros algoritmos documentados é o algoritmo para o cálculo do Maior Divisor Comum (MDC) de Euclides publicado por volta do ano 300 AC. Podemos simplificar este algoritmo dizendo que dados dois inteiros A e B, o MDC entre eles será dado pelo valor absoluto de A se B=0 e pelo MDC entre B e o resto da divisão de A por B se B>0. Escreva uma função para o cálculo do MDC entre dois números inteiros positivos, usando o algoritmo de Euclides conforme apresentado aqui, utilizando Haskell.-}
+mdc :: Int -> Int -> Int
+mdc a b 
+  |b == 0 = abs (a)
+  |otherwise = mdc b (mod a b)
+
+{-Escreva uma função recursiva que dado um número inteiro n, devolva a soma dos dígitos deste número. Exemplo: dado 1234 a função deverá devolver 10. Utilizando Haskell e recursividade.-}
+soma :: Int -> Int
+soma 0 = 0
+soma n = mod n 10 + soma(n `quot` 10)
+
+{-Escreva uma função que devolva a soma de todos os números menores que 10000 que sejam múltiplos de 3 ou 5-}
+somaDez :: Int -> Int -> Int
+somaDez 0 s = s
+somaDez n s
+  |mod n 3 == 0 || mod n 5 == 0 = somaDez (n - 1) (n + s)
+  |otherwise = somaDez(n - 1) s
+
+{-Escreva uma função que, recebendo uma lista de inteiros, apresente a diferença entre a soma dos quadrados e o quadrado da soma destes inteiros, usando recursividade.-}
+difSoma :: [Int] -> Int -> Int -> Int
+difSoma [] quadrado potencia = quadrado - (potencia * potencia)
+difSoma lista quadrado potencia  = difSoma(tail lista) (quadrado + (head lista)*(head lista)) (potencia + head lista)
+
+
+{-Escreva uma função, chamada aoContrario em Haskel para reverter uma lista. Dado [1,2,3] devolva [3,2,1].-}
+aoContrario :: [Int] -> [Int] -> [Int]
+aoContrario [] lista = lista
+aoContrario lista acumulador = aoContrario (tail lista) (head lista : acumulador)
+
+
+{-Escreva uma função chamada somaRecursiva que recebe dois valores inteiros e devolve o produto destes valores sem usar o operador de multiplicação.-}
+somaRecursiva :: Int -> Int -> Int
+somaRecursiva a 0 = 0
+somaRecursiva a b = a + somaRecursiva a (b - 1)
+
+
+{-Escreva uma função chamada comprimento que receba uma lista de inteiros e devolva o comprimento desta lista. Observe que você não pode usar nenhuma função que já calcule o comprimento de uma lista.-}
+comprimento :: [Int] -> Int -> Int
+comprimento [] n = n
+comprimento lista n = comprimento (tail lista) (n - 1)
+
+
+main = do
+  putStrLn ("\nFunc.1: entrada: 6; resultado: " ++ show(fibonacci 6))
+  putStrLn ("\nFunc.2: entrada: 6,5; resultado: " ++ show(mdc 6 5))
+  putStrLn ("\nFunc.3: entrada: 1234; resultado: " ++ show(soma 1234))
+  putStrLn ("\nFunc.4: entrada: 10000; resultado: " ++ show(somaDez 10000 0))
+  putStrLn ("\nFunc.5: entrada: [1, 2, 3, 4], 0, 0; resultado: " ++ show(difSoma [1, 2, 3, 4] 0 0))
+  putStrLn ("\nFunc.8: entrada: [1,2,3]; resultado: " ++ show(aoContrario [1,2,3] []))
+  putStrLn ("\nFunc.9: entrada: 4 6; resultado: " ++ show(somaRecursiva 4 6))
+  putStrLn ("\nFunc.10: entrada: [1,2,3],0; resultado: " ++ show(comprimento [1, 2, 3] 0))
