@@ -1,0 +1,69 @@
+-- Aluno: Luiz Carlos R. Neduziak
+import Data.Char
+
+{-Escreva uma função chamada fatorialn que usando o operador range e a função foldr devolva o fatorial de n.-}
+fatorialn :: Int -> Int
+fatorialn 0 = 1
+fatorialn 1 = 1
+fatorialn n = foldr (*) 1 [1..n]
+
+{-Usando a função map escreva uma função, chamada quadradoReal que recebe uma lista de números reais, positivos e negativos e devolva uma lista com o quadrado de cada um dos inteiros listados.-}
+quadradoReal :: [Double] -> [Double]
+quadradoReal [] = []
+quadradoReal lista = map (^2) lista
+
+{-Usando a função map escreva uma função, comprimentoPalavras que recebe uma lista de palavras e devolve uma lista com o comprimento de cada uma destas palavras.-}
+comprimentoPalavras :: [String] -> [Int]
+comprimentoPalavras lista = map length lista
+
+{-Usando a função filter escreva uma função, chamada maiorMultiploDe29 devolva o maior número entre 0 e 100000 que seja divisivel por 29.-}
+maiorMultiploDe29 :: [Int] -> Int
+maiorMultiploDe29 lista = maximum (filter (predicado) lista)
+  where predicado lista = mod lista 29 == 0
+
+{-Usando a função filter escreva uma função, chamada maiorMultiploDe que recebe um inteiro e devolva o maior número entre 0 e 100000 que seja divisivel por este inteiro.-}
+maiorMultiploDe :: Int -> Int
+maiorMultiploDe 0 = 0
+maiorMultiploDe 1 = 1
+maiorMultiploDe n = maximum (filter (\y -> mod y n == 0) [1..10000])
+
+{-Usando Haskell e a função foldr defina uma função, chamada somaQuadrados que devolva a soma dos quadrados dos itens de uma lista de números naturais de comprimento n. De tal forma que: 𝑠𝑜𝑚𝑎𝑄𝑢𝑎𝑑𝑟𝑎𝑑𝑜𝑠=1^2+2^2+3^2+4^2...+𝑛^2.-}
+somaQuadrados :: [Int] -> [Int]
+somaQuadrados [] = []
+somaQuadrados [1] = [1]
+somaQuadrados (x:xs) = (x ^ 2) : somaQuadrados xs
+
+{-Usando Haskell e a função foldl defina uma função, chamada comprimento, que devolva o comprimento (cardinalidade) de uma lista dada.-}
+comprimento :: [Int] -> Int
+comprimento [] = 0
+comprimento lista = foldl (+) 0 [1 | x <- lista]
+
+{-Esta é uma tarefa de pesquisa: você deve encontrar e executar exemplos em Haskell do uso das seguintes funções disponíveis no Prelude: flip, 'ord', max, min, 'curry', 'uncurry'. Para cada uma destas funções você deverá encontrar, executar e testar no mínimo dois exemplos.-}
+
+-- soma uncurried
+somaUC :: (Int,Int) -> Int
+somaUC (a,b) = a + b
+
+-- multiplicação uncurried
+multiplicaUC :: (Int,Int) -> Int
+multiplicaUC (x,y) = x * y
+
+main = do
+  putStrLn ("\nFunc.1: entrada: 4; resultado: " ++ show(fatorialn 4))
+  putStrLn ("\nFunc.2: entrada: [1, 2, 3]; resultado: " ++ show(quadradoReal [1, 2, 3]))
+  putStrLn ("\nFunc.3: entrada: ['Luiz', 'Neduziak']; resultado: " ++ show(comprimentoPalavras ["Luiz", "Neduziak"]))
+  putStrLn ("\nFunc.4: entrada: [1..50]; resultado: " ++ show(maiorMultiploDe29 [1..100]))
+  putStrLn ("\nFunc.5: entrada: 4; resultado: " ++ show(maiorMultiploDe 4))
+  putStrLn ("\nFunc.6: entrada: [1,2,3]; resultado: " ++ show(somaQuadrados [1, 2, 3]))
+  putStrLn ("\nFunc.7: entrada: [1,2,3,4]; resultado: " ++ show(comprimento [1, 2, 3, 4]))
+  putStrLn "\nFunc.8: entrada: 'flip', 'ord', 'max', 'min', 'curry', 'uncurry'."
+  putStrLn ("\nFlip.1: entrada: mod 3 3; saída: " ++ show(flip mod 3 6))
+  putStrLn ("\nFlip.2: entrada: div 3 6; saída: " ++ show(flip div 3 6))
+  putStrLn ("\nOrd.1: entrada: 'a'; saída: " ++ show(ord 'a'))
+  putStrLn ("\nOrd.2: entrada: 'b'; saída: " ++ show(ord 'b'))
+  putStrLn ("\nMax.1: entrada: 3,6; saída: " ++ show(max 3 6))
+  putStrLn ("\nMax.2: entrada: 2.3, 6.8; saída: " ++ show(max 2.3 6.8))
+  putStrLn ("\nMin.1: entrada: 3,6; saída: " ++ show(min 3 6))
+  putStrLn ("\nMin.2: entrada: 2.3,6.8; saída: " ++ show(min 2.3 6.8))
+  putStrLn ("\nUncurried.1: entrada: 5,5; saída: " ++ show(somaUC (5,5)))
+  putStrLn ("\nUncurried.2: entrada: 5,5; saída: " ++ show(multiplicaUC (5,5)))
