@@ -32,8 +32,8 @@
     (recur int_2 (mod int_1 int_2))))
 
 
-(println "Func.1 entrada [21 2 9 67]; resultado " (ultimo [21 2 9 67]))
-(println "Func.2 entrada [1 2 3 4 5 67]; resultado " (penultimo [1 2 3 4 5 67]))
-(println "Func.3 entrada [1 89 13 34] e 2; resultado " (elementoN [1 89 13 34] 2))
-(println "Func 4 entrada [1 2 3 4 ] []; resultado: " (inverso [1 2 3 4] []))
+(println "Func.1 entrada (21 2 9 67); resultado " (ultimo '(21 2 9 67)))
+(println "Func.2 entrada (1 2 3 4 5 67); resultado " (penultimo '(1 2 3 4 5 67)))
+(println "Func.3 entrada (1 89 13 34) e 2; resultado " (elementoN '(1 89 13 34) 2))
+(println "Func 4 entrada [1 2 3 4] []; resultado: " (inverso [1 2 3 4] []))
 (println "Func 5 entrada 12 e 3; resultado: " (mdc 12 3))
