@@ -1,0 +1,99 @@
+; Aluno: Luiz Carlos R. Neduziak
+
+; Na aula disponível em: https://replit.com/@frankalcantara/ClojureAula2?v=1 foram destacadas diversas funções (expressões), como funções de primeira ordem, disponíveis em Clojure. Sua primeira tarefa será descrever cada uma destas funções e apresentar dois exemplos de uso de cada uma delas. Lembre-se os exemplos precisam ser utilizados de forma que o resutado da função possa ser visto no terminal.
+
+(println "Macro de Idades. Acrescenta uma idade ao final da macro"
+ (->
+  {:idade1 32}
+  (assoc :idade2 76)  
+))
+
+(println "Macro de Nomes. Acrescenta uma nome ao final da macro"
+ (->
+  {:nome1 "Luiz"}
+  (assoc :nome2 "Carlos")  
+))
+
+(println "Macro de Idades. Retira a última idade da Macro"
+ (->
+  {:idade1 32}
+  (dissoc :idade2 76)  
+))
+
+(println "Macro de Nomes. Retira o último nome da Macro"
+ (->
+  {:nome1 "Luiz"}
+  (dissoc :nome2 "Carlos")  
+))
+
+(println "Função range. Cria uma lista com valores de 0 a 9."
+  (range 10))
+
+(println "Função range2. Cria uma lista com valores de -3 a 2."
+  (range -3 3))
+
+(println "Função map. Incrementa valores de um vetor [1 2 3 4 5]."
+  (map inc [1 2 3 4 5]))
+
+(println "Função map2. Soma os vetores [1 2 3 4 5] e [10 9 5 7 3]."
+  (map + [1 2 3 4 5] [10 9 5 7 3]))
+
+(println "Função filter. Quais valores do vetor [10 9 5 7 3] são pares?"
+  (filter even? [10 9 5 7 3]))
+
+(println "Função filter2. Quais valores do vetor [10 9 5 7 3] são ímpares?"
+  (filter odd? [10 9 5 7 3]))
+
+(println "Função nth. Retorna o elemento na 3a posição"
+  (nth [10 9 5 7 3] 3))
+
+(println "Função nth2. Retorna o elemento na 1a posição"
+  (nth ["a" "b" "c"] 0))
+
+(println "Função conj em um vetor. Retorna o vetor acrescido do valor ao final do vetor"
+  (conj [3 4 6] 0))
+
+(println "Função conj em uma lista. Retorna o vetor acrescido do valor ao início da lista"
+  (conj '(3 4 6) 0))
+
+(println "Função sort em um vetor. Retorna o vetor ordenado"
+  (sort [1 2 3]))
+
+(println "Função sort em um vetor. Retorna o vetor ordenado"
+  (sort [1 2 3]))
+
+(println "Função sort em um vetor de caracteres. Retorna o vetor ordenado"
+  (sort ["c" "d" "a"]))
+
+(println "Função partition-by por número impar. Separa em partição de números ímpares"
+  (partition-by odd? [1 3 4 6]))
+
+(println "Função partition-by por número par. Separa em partição de números pares"
+  (partition-by even? [1 3 4 6 8]))
+
+
+;2. Utilizando a linguagem Clojure, crie uma função chamada ehPrimo que receba um inteiro e devolva True caso este inteiro seja verdadeiro e False caso contrário.
+(defn montaLista [numero contador lista]  
+  (if (<= contador numero)
+    (if (= (mod numero contador) 0)
+      (recur numero (+ contador 1) (conj lista contador))
+      (recur numero (+ contador 1) lista)
+      )
+    lista))
+(defn ehPrimo  [n] (=(count(montaLista n 1 []))2))
+
+(println "Func.2-ehPrimo entrada 10; resultado: " (ehPrimo 10))
+(println "Func.2-ehPrimo entrada 7; resultado: " (ehPrimo 7))
+
+;3. Utilizando a linguagem Clojure, crie uma função chamada fatoresPrimos que receba um inteiro e devolva uma lista dos seus fatores primos. Decomposição em fatores primos é uma tarefa fundamental da aritmética.
+
+(defn criaLista [numero listaPrimos fatores]
+  (if (>(count fatores)0) 
+    (if (and (ehPrimo (first fatores)) (=(mod numero (first fatores))0))
+      (recur numero (conj listaPrimos (first fatores)) (pop fatores))
+      (recur numero listaPrimos (pop fatores))
+    )
+    listaPrimos))
+(defn fatoresPrimos [numero] (criaLista numero [] (montaLista numero 1 [])))
+
+(println "Func.3 entrada 10; saída: " (fatoresPrimos 10))
